@@ -1,7 +1,7 @@
 from math import sqrt
 
 """
-prime factorisation script
+prime factorization script
 find_prime_factors returns a list of prime factorization
 """
 
