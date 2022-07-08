@@ -1,3 +1,5 @@
+from math import sqrt
+
 def get_number():
     """
     Asks for a number, validates, and returns entered integer.
@@ -14,7 +16,7 @@ def get_number():
 
 
 def is_prime(num):
-    for check in range(2, num//2+1):
+    for check in range(2, int(sqrt(num))):
         if num % check == 0:
             return False
     return True
@@ -26,7 +28,17 @@ def find_prime_factors(num):
     """
     primes = []
     while not is_prime(num):
-        for guess in range(2, num//2+1):
+        primes_set = set(primes)
+        for guess in primes_set:
+            if num % guess == 0:
+                primes.append(guess)
+                num = int(num / guess)
+                break
+        if len(primes) > 0:
+            start = primes[-1]
+        else:
+            start = 2
+        for guess in range(start, int(sqrt(num))):
             if num % guess == 0:
                 primes.append(guess)
                 num = int(num / guess)
@@ -49,6 +61,8 @@ def main():
 
     primes = find_prime_factors(number)
     primes_set = set(primes)
+    primes_sort = list(primes_set)
+    primes_sort.sort()
 
     if len(primes) == 1:
         print(f'{number} is a prime!')
@@ -57,7 +71,7 @@ def main():
         print(f'The only prime factor of {number} is {primes[0]}')
     else:
         text = f'Prime factors of {number} are'
-        for _, pf in enumerate(primes_set):
+        for _, pf in enumerate(primes_sort):
             if _ == len(primes_set) - 1:
                 text += f' {pf}'
             elif _ == len(primes_set) - 2:
