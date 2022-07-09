@@ -47,18 +47,13 @@ def find_prime_factors(num):
         num = num / 2
         primes.append(2)
 
-# find all the prime factors
+# find all remaining prime factors
     for guess in range(2, int(sqrt(num))+1):
         guess = guess * 2 - 1
-        if is_prime(guess) and num % guess == 0:
-            num = num / guess
-            primes.append(guess)
-
-# check how many times each factor divides the number
-    for prime in primes:
-        while num % prime == 0:
-            primes.append(prime)
-            num = num / prime
+        if is_prime(guess):
+            while num % guess == 0:
+                num = num / guess
+                primes.append(guess)
 
     if num != 1:
         primes.append(int(num))
