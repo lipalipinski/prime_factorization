@@ -42,15 +42,23 @@ def find_prime_factors(num):
     primes = []
     if num <= 1:
         return primes
-
+# check if divisible by 2
     while num % 2 == 0:
         num = num / 2
         primes.append(2)
 
+# find all the prime factors
     for guess in range(2, int(sqrt(num))+1):
-        if num % guess == 0:
+        guess = guess * 2 - 1
+        if is_prime(guess) and num % guess == 0:
             num = num / guess
             primes.append(guess)
+
+# check how many times each factor divides the number
+    for prime in primes:
+        while num % prime == 0:
+            primes.append(prime)
+            num = num / prime
 
     if num != 1:
         primes.append(int(num))

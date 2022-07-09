@@ -35,7 +35,9 @@ class TestFindPrimeFactors(unittest.TestCase):
         self.assertListEqual(prime_factorization.find_prime_factors(2), [2])
         self.assertListEqual(prime_factorization.find_prime_factors(4), [2, 2])
         self.assertListEqual(prime_factorization.find_prime_factors(10), [2, 5])
+        self.assertListEqual(prime_factorization.find_prime_factors(27), [3, 3, 3])
         self.assertListEqual(prime_factorization.find_prime_factors(100), [2, 2, 5, 5])
+        self.assertListEqual(prime_factorization.find_prime_factors(108), [2, 2, 3, 3, 3])
 
 if __name__ == '__main__':
     unittest.main()
