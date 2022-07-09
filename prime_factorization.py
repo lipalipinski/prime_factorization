@@ -24,8 +24,12 @@ def is_prime(num):
     """
     checks if num is a prime number
     """
+    if num <= 1:
+        return False
+    if num % 2 == 0 and num != 2:
+        return False
     for check in range(2, int(sqrt(num))+1):
-        if num % check == 0:
+        if num % (check*2-1) == 0:
             return False
     return True
 
@@ -35,6 +39,8 @@ def find_prime_factors(num):
     returns a list of prime factors of a given number
     """
     primes = []
+    if num <= 1:
+        return primes
     while not is_prime(num):
 
         primes_set = set(primes)    # first try dividing by known prime factors
@@ -66,7 +72,7 @@ def main():
         if number < 1:
             print('The number has to be greater than 0')
         elif number == 1:
-            print('1 neither prime or complex, it has no prime factors.')
+            print('1 is neither prime nor complex, it has no prime factors.')
             return True
 
     primes = find_prime_factors(number)
