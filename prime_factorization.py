@@ -1,9 +1,10 @@
-from math import sqrt
-
 """
 prime factorization script
 find_prime_factors returns a list of prime factorization
 """
+
+from math import sqrt
+
 
 def get_number():
     """
@@ -16,7 +17,7 @@ def get_number():
             num = int(num)
             break
         except ValueError:
-            print('This is not a number!') 
+            print('This is not a number!')
     return num
 
 
@@ -41,29 +42,27 @@ def find_prime_factors(num):
     primes = []
     if num <= 1:
         return primes
-    while not is_prime(num):
 
-        primes_set = set(primes)    # first try dividing by known prime factors
-        for guess in primes_set:
-            if num % guess == 0:
-                primes.append(guess)
-                num = int(num / guess)
-                break
+    while num % 2 == 0:
+        num = num / 2
+        primes.append(2)
 
-        if len(primes) > 0:        #then check if there are any prime factors left
-            start = primes[-1]
-        else:
-            start = 2
-        for guess in range(start, int(sqrt(num))+1):
-            if num % guess == 0:
-                primes.append(guess)
-                num = int(num / guess)
-                break
-    primes.append(num)
+    for guess in range(2, int(sqrt(num))+1):
+        if num % guess == 0:
+            num = num / guess
+            primes.append(guess)
+
+    if num != 1:
+        primes.append(int(num))
+    primes.sort()
     return primes
 
 
 def main():
+    """
+    main function
+    """
+
     print("I'lind all the prime factors of a given number. ")
 
     number = 0
